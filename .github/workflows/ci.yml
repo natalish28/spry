@@ -18,7 +18,7 @@ jobs:
       - name: Install Ruff
         run: pip install ruff
       - name: Run Ruff Linter
-        run: ruff check backend/ --ignore E501
+        run: ruff check backend/ --config backend/pyproject.toml
 
   build-frontend:
     runs-on: ubuntu-latest

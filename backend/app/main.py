@@ -1,9 +1,8 @@
-from typing import List
-from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
-from app.database import get_db, engine, Base
+from app.database import Base, engine, get_db
 from app.models import Meeting
 from app.schemas import MeetingCreate, MeetingResponse
 
@@ -19,7 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/api/meetings", response_model=List[MeetingResponse])
+@app.get("/api/meetings", response_model=list[MeetingResponse])
 def list_meetings(db: Session = Depends(get_db)):
     return db.query(Meeting).order_by(Meeting.starts_at.asc()).all()
 

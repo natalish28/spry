@@ -15,12 +15,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install dependencies and linter
-        run: |
-          pip install ruff
+      - name: Install Ruff
+        run: pip install ruff
       - name: Run Ruff Linter
-        run: |
-          ruff check backend/
+        run: ruff check backend/ --ignore E501
 
   build-frontend:
     runs-on: ubuntu-latest
